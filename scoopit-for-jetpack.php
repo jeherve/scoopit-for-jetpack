@@ -22,22 +22,28 @@ class Scoopit_Button {
 	private function __construct() {
 		// Check if Jetpack and the sharing module is active
 		if ( class_exists( 'Jetpack' ) && method_exists( 'Jetpack', 'get_active_modules' ) && in_array( 'sharedaddy', Jetpack::get_active_modules() ) )
-			$share_plugin = preg_grep( '/\/jetpack\.php$/i', wp_get_active_and_valid_plugins() );
-			if ( ! class_exists( 'Sharing_Source' ) ) {
-				include_once( preg_replace( '/jetpack\.php$/i', 'modules/sharedaddy/sharing-sources.php',
-				reset( $share_plugin ) ) );
-			}
-			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_script' ) );
-			add_filter( 'sharing_services', array( 'Share_Scoopit', 'inject_service' ) );
+			add_action( 'plugins_loaded', array( $this, 'setup' ) );
 	}
+	
+	public function setup() {
+        add_filter( 'sharing_services', array( 'Share_Scoopit', 'inject_service' ) );
+        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_script' ) );
+    }
 	
 	// Add Javascript in the footer
 	public function enqueue_script() {
 		wp_enqueue_script( 'scoopit-js', ( is_ssl() ? 'https:' : 'http:' ) . '//www.scoop.it/button/scit.js', false, null, true );
 	}
 }
-// And boom.
-Scoopit_Button::get_instance();
+
+// Include Jetpack's sharing class, Sharing_Source
+$share_plugin = wp_get_active_and_valid_plugins();
+if ( is_multisite() ) {
+	$share_plugin = array_unique( array_merge($share_plugin, wp_get_active_network_plugins() ) );
+}
+$share_plugin = preg_grep( '/\/jetpack\.php$/i', $share_plugin );
+if ( ! class_exists( 'Sharing_Source' ) )
+	include_once( preg_replace( '/jetpack\.php$/i', 'modules/sharedaddy/sharing-sources.php', reset( $share_plugin ) ) );
 
 // Build button
 class Share_Scoopit extends Sharing_Source {
@@ -62,3 +68,6 @@ class Share_Scoopit extends Sharing_Source {
 		return $services;
 	}
 }
+
+// And boom.
+Scoopit_Button::get_instance();
