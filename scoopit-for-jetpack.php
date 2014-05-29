@@ -57,7 +57,6 @@ if ( empty( $share_plugin ) ) {
 
 } elseif ( ! class_exists( 'Sharing_Source' ) ) {
 	include_once( preg_replace( '/jetpack\.php$/i', 'modules/sharedaddy/sharing-sources.php', reset( $share_plugin ) ) );
-}
 
 // Build button
 class Share_Scoopit extends Sharing_Source {
@@ -122,6 +121,8 @@ class Share_Scoopit extends Sharing_Source {
 		return $services;
 	}
 }
+
+} // End check for Sharing_Source
 
 // And boom.
 Scoopit_Button::get_instance();
