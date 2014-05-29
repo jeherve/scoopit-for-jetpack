@@ -1,9 +1,9 @@
 === Scoop.it for Jetpack ===
 Contributors: jeherve
 Tags: WordPress.com, Jetpack, sharing, scoopit, scoop.it 
-Requires at least: 3.3
-Tested up to: 3.6
-Stable tag: 1.0
+Requires at least: 3.8
+Tested up to: 3.9.1
+Stable tag: 1.1
 
 Add a Scoop.it button to the Jetpack Sharing module
 
@@ -25,6 +25,11 @@ This plugin is a work in progress. You can report issues [here](http://wordpress
 6. Enjoy! :)
 
 == Changelog ==
+
+= 1.1 =
+* Update the plugin to be compatible with Jetpack 3.0
+* Create new button options for Icon and Icon + Text button styles
+* Add a notice when Jetpack is deactivated
 
 = 1.0 =
 * Initial Release

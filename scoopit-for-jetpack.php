@@ -4,7 +4,7 @@
  * Plugin URI: http://wordpress.org/plugins/scoopit-for-jetpack/
  * Description: Add a Scoop.it button to the Jetpack Sharing module
  * Author: Jeremy Herve
- * Version: 1.0
+ * Version: 1.1
  * Author URI: http://jeremyherve.com
  * License: GPL2+
  * Text Domain: jp_scoopit_share
