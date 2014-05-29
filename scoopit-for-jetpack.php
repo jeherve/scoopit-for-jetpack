@@ -7,6 +7,7 @@
  * Version: 1.0
  * Author URI: http://jeremyherve.com
  * License: GPL2+
+ * Text Domain: jp_scoopit_share
  */
 
 class Scoopit_Button {
@@ -40,11 +41,28 @@ class Scoopit_Button {
 // Include Jetpack's sharing class, Sharing_Source
 $share_plugin = wp_get_active_and_valid_plugins();
 if ( is_multisite() ) {
-	$share_plugin = array_unique( array_merge($share_plugin, wp_get_active_network_plugins() ) );
+	$share_plugin = array_unique( array_merge( $share_plugin, wp_get_active_network_plugins() ) );
 }
 $share_plugin = preg_grep( '/\/jetpack\.php$/i', $share_plugin );
-if ( ! class_exists( 'Sharing_Source' ) )
+
+if ( empty( $share_plugin ) ) {
+
+	add_action( 'admin_notices', 'jp_scoopit_install_jetpack' );
+
+	// Prompt to install Jetpack
+	function jp_scoopit_install_jetpack() {
+		echo '<div class="error"><p>';
+		printf(__( 'To use the Scoop.it for Jetpack plugin, you\'ll need to install and activate <a href="%1$s">Jetpack</a> first, and <a href="%2$s">activate the Sharing module</a>.'),
+		'plugin-install.php?tab=search&s=jetpack&plugin-search-input=Search+Plugins',
+		'admin.php?page=jetpack_modules',
+		'jp_scoopit_share'
+		);
+		echo '</p></div>';
+	}
+
+} elseif ( ! class_exists( 'Sharing_Source' ) ) {
 	include_once( preg_replace( '/jetpack\.php$/i', 'modules/sharedaddy/sharing-sources.php', reset( $share_plugin ) ) );
+}
 
 // Build button
 class Share_Scoopit extends Sharing_Source {
