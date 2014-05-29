@@ -21,8 +21,9 @@ class Scoopit_Button {
 
 	private function __construct() {
 		// Check if Jetpack and the sharing module is active
-		if ( class_exists( 'Jetpack' ) && method_exists( 'Jetpack', 'get_active_modules' ) && in_array( 'sharedaddy', Jetpack::get_active_modules() ) )
+		if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'sharedaddy' ) ) {
 			add_action( 'plugins_loaded', array( $this, 'setup' ) );
+		}
 	}
 
 	public function setup() {
