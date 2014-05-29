@@ -11,11 +11,11 @@
 
 class Scoopit_Button {
 	private static $instance;
-	
+
 	static function get_instance() {
 		if ( ! self::$instance )
 			self::$instance = new Scoopit_Button;
- 
+
 		return self::$instance;
 	}
 
@@ -24,12 +24,12 @@ class Scoopit_Button {
 		if ( class_exists( 'Jetpack' ) && method_exists( 'Jetpack', 'get_active_modules' ) && in_array( 'sharedaddy', Jetpack::get_active_modules() ) )
 			add_action( 'plugins_loaded', array( $this, 'setup' ) );
 	}
-	
+
 	public function setup() {
         add_filter( 'sharing_services', array( 'Share_Scoopit', 'inject_service' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_script' ) );
     }
-	
+
 	// Add Javascript in the footer
 	public function enqueue_script() {
 		wp_enqueue_script( 'scoopit-js', ( is_ssl() ? 'https:' : 'http:' ) . '//www.scoop.it/button/scit.js', false, null, true );
@@ -47,7 +47,7 @@ if ( ! class_exists( 'Sharing_Source' ) )
 
 // Build button
 class Share_Scoopit extends Sharing_Source {
-	var $shortname = 'scoopit';	
+	var $shortname = 'scoopit';
 	public function __construct( $id, array $settings ) {
 		parent::__construct( $id, $settings );
 	}
@@ -55,8 +55,8 @@ class Share_Scoopit extends Sharing_Source {
 	public function get_name() {
 		return __( 'Scoop.it', 'scoopit' );
 	}
-	
-	public function get_display( $post ) {	
+
+	public function get_display( $post ) {
 		return '<a href="http://www.scoop.it" class="scoopit-button" scit-position="horizontal" scit-url="' . get_permalink( $post->ID ) . '" >Scoop.it</a>';
 	}
 
