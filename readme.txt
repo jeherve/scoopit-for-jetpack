@@ -11,9 +11,9 @@ Add a Scoop.it button to the Jetpack Sharing module
 
 Extends the Jetpack plugin and allows you to add a Scoop.it sharing button to the list of sharing services available under Settings > Sharing in your dashboard.
 
-Important: for this plugin to work, you must activate [Jetpack](http://wordpress.org/extend/plugins/jetpack/) first, and activate the Sharing module.
+Important: for this plugin to work, you must activate [Jetpack](http://wordpress.org/plugins/jetpack/) first, and activate the Sharing module.
 
-This plugin is a work in progress. You can report issues [here](http://wordpress.org/extend/plugins/scoopit-for-jetpack/), or submit a pull request [on GitHub](https://github.com/jeherve/scoopit-for-jetpack/).
+This plugin is a work in progress. You can report issues [here](http://wordpress.org/plugins/scoopit-for-jetpack/), or submit a pull request [on GitHub](https://github.com/jeherve/scoopit-for-jetpack/).
 
 == Installation ==
 

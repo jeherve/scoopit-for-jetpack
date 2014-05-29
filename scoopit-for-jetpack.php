@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Scoop.it for Jetpack
- * Plugin URI: http://wordpress.org/extend/plugins/scoopit-for-kindle/
+ * Plugin URI: http://wordpress.org/plugins/scoopit-for-jetpack/
  * Description: Add a Scoop.it button to the Jetpack Sharing module
  * Author: Jeremy Herve
  * Version: 1.0
